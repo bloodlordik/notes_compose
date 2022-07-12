@@ -17,5 +17,5 @@ val androidModule = module {
     }
     factory<AppDispatchers> { AndroidDispatcher() }
     single { NotesRepository(get(), get()) }
-    viewModel { MainViewModel(get()) }
+    viewModel { MainViewModel(get(), get()) }
 }

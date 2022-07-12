@@ -6,6 +6,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import org.junit.After
 import org.junit.Before
+import org.junit.Test
 import org.junit.runner.RunWith
 import ru.kirshov.notescompose.data.local.AppDatabase
 import ru.kirshov.notescompose.data.local.NotesDao
@@ -26,5 +27,11 @@ class RoomTest {
     @After
     fun closeDb(){
         testDb.close()
+    }
+
+    @Test
+    fun emptyTest(){
+        val list = dao.getAll()
+        
     }
 }
