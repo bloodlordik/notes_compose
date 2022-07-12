@@ -5,11 +5,12 @@ import androidx.room.*
 @Dao
 interface NotesDao {
     @Query("SELECT * FROM $TABLE_NAME")
-    suspend fun getAll():List<NoteEntity>
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertNote(note:NoteEntity)
+    fun getAll(): List<NoteEntity>
+    @Insert
+    fun insert(note:NoteEntity)
     @Delete
-    suspend fun deleteNote(note: NoteEntity)
+    fun delete(note: NoteEntity)
     @Update
-    suspend fun updateNote(note: NoteEntity)
+    fun update(note: NoteEntity)
+
 }
