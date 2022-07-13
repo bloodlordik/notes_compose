@@ -32,6 +32,6 @@ class RoomTest {
     @Test
     fun emptyTest(){
         val list = dao.getAll()
-        
+
     }
 }
