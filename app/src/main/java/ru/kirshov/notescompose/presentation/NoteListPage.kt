@@ -1,5 +1,7 @@
 package ru.kirshov.notescompose.presentation
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -22,14 +24,16 @@ fun NoteListPage(navController: NavController, uiStateMain: UiStateMain){
             }
         }
     ) {
-        when(uiStateMain){
-            is EmptyList->{
-                Text(text = "Empty")
-            }
-            is NoteList->{
-                Text(text = uiStateMain.list.first().content)
-            }
-        }
+       Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.secondaryVariant)){
+           when(uiStateMain){
+               is EmptyList->{
+                   Text(text = "Empty")
+               }
+               is NoteList->{
+                   NoteListView(noteList = uiStateMain.list)
+               }
+           }
+       }
     }
 
 }
