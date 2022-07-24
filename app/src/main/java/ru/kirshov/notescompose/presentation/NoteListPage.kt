@@ -7,12 +7,15 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
+import kotlinx.coroutines.flow.Flow
 import ru.kirshov.notescompose.domain.data.NoteRecord
 
 @Composable
-fun NoteListPage(navController: NavController, uiStateMain: UiStateMain){
+fun NoteListPage(navController: NavController, notes:Flow<List<NoteRecord>>){
+    val state = notes.collectAsState(initial = emptyList())
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         floatingActionButtonPosition = FabPosition.Center,
@@ -24,15 +27,15 @@ fun NoteListPage(navController: NavController, uiStateMain: UiStateMain){
             }
         }
     ) {
-       Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colors.secondaryVariant)){
-           when(uiStateMain){
-               is EmptyList->{
-                   Text(text = "Empty")
-               }
-               is NoteList->{
-                   NoteListView(noteList = uiStateMain.list)
-               }
-           }
+       if (state.value.isEmpty()){
+           Text(text = "Not record")
+       }else{
+          NoteListView(
+              noteList = state.value,
+              onSelect = {sectedId->
+
+              }
+          )
        }
     }
 

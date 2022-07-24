@@ -9,16 +9,18 @@ import androidx.navigation.compose.rememberNavController
 import ru.kirshov.notescompose.domain.MainViewModel
 
 @Composable
-fun RootScaffold(viewModel: MainViewModel){
+fun RootScaffold(viewModel: MainViewModel) {
     val navController = rememberNavController()
-    val uiState = viewModel.itemsState.collectAsState(initial = EmptyList)
-    NavHost(navController = navController, startDestination = NavigationDestination.RootPage.name){
-        composable(NavigationDestination.RootPage.name){
-            NoteListPage(navController = navController, uiStateMain = uiState.value)
+
+    NavHost(navController = navController, startDestination = NavigationDestination.RootPage.name) {
+        composable(NavigationDestination.RootPage.name) {
+        NoteListPage(navController = navController, notes = viewModel.getAllNotes())
         }
-        composable(NavigationDestination.NotePage.name){
-            NoteDetail(navController = navController)
+        composable(NavigationDestination.NotePage.name) {
+            NoteDetail(navController = navController, viewModel)
         }
+
+
     }
 
 }
